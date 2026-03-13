@@ -54,6 +54,7 @@ public class StudiesServiceImpl implements IStudiesService {
     public void deleteStudy(Long id) {
         Studies existingStudy = studiesRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Study not found with id: " + id));
+
         studiesRepository.delete(existingStudy);
     }
 

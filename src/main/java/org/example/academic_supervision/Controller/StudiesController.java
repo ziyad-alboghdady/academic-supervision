@@ -19,105 +19,38 @@ public class StudiesController {
         this.studiesService = studiesService;
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<StudiesDTO>> getAllStudies() {
-        try {
-            List<StudiesDTO> studies = studiesService.getAllStudies();
-
-            if (studies == null || studies.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(studies, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @GetMapping
+    public List<StudiesDTO> getAllStudies() {
+        return studiesService.getAllStudies();
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<StudiesDTO> getStudyById(@PathVariable Long id) {
-        try {
-            if (id == null || id <= 0) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            StudiesDTO study = studiesService.getStudyById(id);
-            return new ResponseEntity<>(study, HttpStatus.OK);
-
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @GetMapping("/{id}")
+    public StudiesDTO getStudyById(@PathVariable Long id) {
+        return studiesService.getStudyById(id);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<StudiesDTO> createStudy(@Valid @RequestBody StudiesDTO studyDTO) {
-        try {
-            if (studyDTO == null) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            if (studyDTO.getTitle() == null || studyDTO.getTitle().trim().isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            if (studyDTO.getDescription() == null || studyDTO.getDescription().trim().isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            StudiesDTO createdStudy = studiesService.createStudy(studyDTO);
-            return new ResponseEntity<>(createdStudy, HttpStatus.CREATED);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PostMapping
+    public StudiesDTO createStudy(@Valid @RequestBody StudiesDTO studyDTO) {
+        return studiesService.createStudy(studyDTO);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<StudiesDTO> updateStudy(@PathVariable Long id,
-                                                  @Valid @RequestBody StudiesDTO studyDTO) {
-        try {
-            if (id == null || id <= 0) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            if (studyDTO == null) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            if (studyDTO.getTitle() == null || studyDTO.getTitle().trim().isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            if (studyDTO.getDescription() == null || studyDTO.getDescription().trim().isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            StudiesDTO updatedStudy = studiesService.updateStudy(id, studyDTO);
-            return new ResponseEntity<>(updatedStudy, HttpStatus.OK);
-
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PutMapping("/{id}")
+    public StudiesDTO updateStudy(@PathVariable Long id, @Valid @RequestBody StudiesDTO studyDTO) {
+        return studiesService.updateStudy(id, studyDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteStudy(@PathVariable Long id) {
         try {
             if (id == null || id <= 0) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Invalid id", HttpStatus.BAD_REQUEST);
             }
 
             studiesService.deleteStudy(id);
             return new ResponseEntity<>("Study deleted successfully", HttpStatus.OK);
 
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>("Study not found", HttpStatus.NOT_FOUND);
         } catch (Exception e) {
-            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -29,7 +29,7 @@ public class Studies {
     private String title;
 
 
-    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Supervises> supervises;
 
 }

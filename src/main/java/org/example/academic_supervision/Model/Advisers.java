@@ -23,14 +23,14 @@ public class Advisers {
     @NotBlank(message = "Adviser name cannot be empty")
     @Size(min = 3, max = 50, message = "Adviser name must be between 3 and 50 characters")
     @Column(length = 50, nullable = false)
-    private String adviserName;
+    private String name;
 
     @NotBlank(message = "Department cannot be empty")
     @Size(min = 2, max = 50, message = "Department must be between 2 and 50 characters")
     @Column(length = 50, nullable = false)
     private String department;
 
-    @OneToMany(mappedBy = "adviser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "adviser", cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnore
     private List<Supervises> supervises;
 }
