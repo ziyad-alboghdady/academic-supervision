@@ -1,11 +1,9 @@
 package org.example.academic_supervision.Service;
 
-import jakarta.validation.Valid;
-import org.example.academic_supervision.Service.IStudiesService;
+import org.example.academic_supervision.DTO.StudiesDTO;
 import org.example.academic_supervision.Model.Studies;
 import org.example.academic_supervision.Repository.StudiesRepository;
 import org.springframework.stereotype.Service;
-import org.example.academic_supervision.DTO.StudiesDTO;
 
 import java.util.List;
 
@@ -69,7 +67,6 @@ public class StudiesServiceImpl implements IStudiesService {
 
     private Studies mapToEntity(StudiesDTO dto) {
         Studies study = new Studies();
-        study.setId(dto.getId());
         study.setTitle(dto.getTitle());
         study.setDescription(dto.getDescription());
         return study;

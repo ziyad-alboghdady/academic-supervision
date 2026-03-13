@@ -18,13 +18,5 @@ public class StudiesDTO {
     @Size(min = 5, max = 100)
     private String description;
 
-    private Studies mapToEntity(StudiesDTO dto) {
 
-        Studies study = new Studies();
-
-        study.setTitle(dto.getTitle());
-        study.setDescription(dto.getDescription());
-
-        return study;
-    }
 }
