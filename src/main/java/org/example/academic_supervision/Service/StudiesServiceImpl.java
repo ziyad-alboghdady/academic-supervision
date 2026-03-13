@@ -51,4 +51,14 @@ public class StudiesServiceImpl implements IStudiesService {
 
         studiesRepository.delete(existingStudy);
     }
+    private Studies mapToEntity(org.example.academic_supervision.dto.StudiesDTO dto) {
+
+        Studies study = new Studies();
+
+        study.setId(dto.getId());
+        study.setTitle(dto.getTitle());
+        study.setDescription(dto.getDescription());
+
+        return study;
+    }
 }
