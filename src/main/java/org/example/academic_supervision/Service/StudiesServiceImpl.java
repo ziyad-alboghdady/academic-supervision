@@ -5,6 +5,7 @@ import org.example.academic_supervision.Service.IStudiesService;
 import org.example.academic_supervision.Model.Studies;
 import org.example.academic_supervision.Repository.StudiesRepository;
 import org.springframework.stereotype.Service;
+import org.example.academic_supervision.dto.StudiesDTO;
 
 import java.util.List;
 
@@ -51,14 +52,16 @@ public class StudiesServiceImpl implements IStudiesService {
 
         studiesRepository.delete(existingStudy);
     }
-    private Studies mapToEntity(org.example.academic_supervision.dto.StudiesDTO dto) {
+    private StudiesDTO mapToDTO(Studies study) {
 
-        Studies study = new Studies();
+        StudiesDTO dto = new StudiesDTO();
 
-        study.setId(dto.getId());
-        study.setTitle(dto.getTitle());
-        study.setDescription(dto.getDescription());
+        dto.setId(study.getId());
+        dto.setTitle(study.getTitle());
+        dto.setDescription(study.getDescription());
 
-        return study;
+        return dto;
     }
+
+
 }
