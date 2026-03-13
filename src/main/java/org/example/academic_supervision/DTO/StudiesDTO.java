@@ -1,4 +1,4 @@
-package org.example.academic_supervision.dto;
+package org.example.academic_supervision.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

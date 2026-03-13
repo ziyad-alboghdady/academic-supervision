@@ -1,18 +1,13 @@
 package org.example.academic_supervision.Service;
 
-import org.example.academic_supervision.Model.Studies;
+import org.example.academic_supervision.DTO.StudiesDTO;
 
 import java.util.List;
 
 public interface IStudiesService {
-
-    List<Studies> getAllStudies();
-
-    Studies getStudyById(Long id);
-
-    Studies createStudy(Studies study);
-
-    Studies updateStudy(Long id, Studies study);
-
+    List<StudiesDTO> getAllStudies();
+    StudiesDTO getStudyById(Long id);
+    StudiesDTO createStudy(StudiesDTO studyDTO);
+    StudiesDTO updateStudy(Long id, StudiesDTO studyDTO);
     void deleteStudy(Long id);
 }

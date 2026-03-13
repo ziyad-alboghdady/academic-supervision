@@ -5,7 +5,7 @@ import org.example.academic_supervision.Service.IStudiesService;
 import org.example.academic_supervision.Model.Studies;
 import org.example.academic_supervision.Repository.StudiesRepository;
 import org.springframework.stereotype.Service;
-import org.example.academic_supervision.dto.StudiesDTO;
+import org.example.academic_supervision.DTO.StudiesDTO;
 
 import java.util.List;
 
@@ -19,49 +19,59 @@ public class StudiesServiceImpl implements IStudiesService {
     }
 
     @Override
-    public List<Studies> getAllStudies() {
-        return studiesRepository.findAll();
+    public List<StudiesDTO> getAllStudies() {
+        return studiesRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .toList();
     }
 
     @Override
-    public Studies getStudyById(Long id) {
-        return studiesRepository.findById(id)
+    public StudiesDTO getStudyById(Long id) {
+        Studies study = studiesRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Study not found with id: " + id));
+        return mapToDTO(study);
     }
 
     @Override
-    public Studies createStudy(@Valid Studies study) {
-        return studiesRepository.save(study);
+    public StudiesDTO createStudy(StudiesDTO dto) {
+        Studies study = mapToEntity(dto);
+        Studies savedStudy = studiesRepository.save(study);
+        return mapToDTO(savedStudy);
     }
 
     @Override
-    public Studies updateStudy(Long id, @Valid Studies study) {
+    public StudiesDTO updateStudy(Long id, StudiesDTO dto) {
         Studies existingStudy = studiesRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Study not found with id: " + id));
 
-        existingStudy.setTitle(study.getTitle());
-        existingStudy.setDescription(study.getDescription());
+        existingStudy.setTitle(dto.getTitle());
+        existingStudy.setDescription(dto.getDescription());
 
-        return studiesRepository.save(existingStudy);
+        Studies updatedStudy = studiesRepository.save(existingStudy);
+        return mapToDTO(updatedStudy);
     }
 
     @Override
     public void deleteStudy(Long id) {
         Studies existingStudy = studiesRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Study not found with id: " + id));
-
         studiesRepository.delete(existingStudy);
     }
+
     private StudiesDTO mapToDTO(Studies study) {
-
         StudiesDTO dto = new StudiesDTO();
-
         dto.setId(study.getId());
         dto.setTitle(study.getTitle());
         dto.setDescription(study.getDescription());
-
         return dto;
     }
 
-
+    private Studies mapToEntity(StudiesDTO dto) {
+        Studies study = new Studies();
+        study.setId(dto.getId());
+        study.setTitle(dto.getTitle());
+        study.setDescription(dto.getDescription());
+        return study;
+    }
 }

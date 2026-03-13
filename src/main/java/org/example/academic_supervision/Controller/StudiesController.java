@@ -1,7 +1,7 @@
 package org.example.academic_supervision.Controller;
 
 import jakarta.validation.Valid;
-import org.example.academic_supervision.Model.Studies;
+import org.example.academic_supervision.DTO.StudiesDTO;
 import org.example.academic_supervision.Service.IStudiesService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,23 +18,23 @@ public class StudiesController {
     }
 
     @GetMapping
-    public List<Studies> getAllStudies() {
+    public List<StudiesDTO> getAllStudies() {
         return studiesService.getAllStudies();
     }
 
     @GetMapping("/{id}")
-    public Studies getStudyById(@PathVariable Long id) {
+    public StudiesDTO getStudyById(@PathVariable Long id) {
         return studiesService.getStudyById(id);
     }
 
     @PostMapping
-    public Studies createStudy(@Valid @RequestBody Studies study) {
-        return studiesService.createStudy(study);
+    public StudiesDTO createStudy(@Valid @RequestBody StudiesDTO studyDTO) {
+        return studiesService.createStudy(studyDTO);
     }
 
     @PutMapping("/{id}")
-    public Studies updateStudy(@PathVariable Long id, @Valid @RequestBody Studies study) {
-        return studiesService.updateStudy(id, study);
+    public StudiesDTO updateStudy(@PathVariable Long id, @Valid @RequestBody StudiesDTO studyDTO) {
+        return studiesService.updateStudy(id, studyDTO);
     }
 
     @DeleteMapping("/{id}")
