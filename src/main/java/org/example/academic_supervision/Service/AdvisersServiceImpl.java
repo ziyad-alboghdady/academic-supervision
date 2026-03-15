@@ -28,4 +28,13 @@ public class AdvisersServiceImpl implements IAdvisersService{
                 .orElseThrow(() -> new RuntimeException("Adviser not found: " + id));
         return convertToDTO(adviser);
     }
+
+    @Override
+    public AdvisersDTO createAdviser(Advisers adviser) {
+        if (adviser.getId() != null && advisersRepository.existsById(adviser.getId())) {
+            throw new RuntimeException("Adviser already exists: " + adviser.getId());
+        }
+        Advisers savedAdviser = advisersRepository.save(adviser);
+        return convertToDTO(savedAdviser);
+    }
 }
