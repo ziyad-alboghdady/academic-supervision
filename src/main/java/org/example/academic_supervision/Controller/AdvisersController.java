@@ -30,4 +30,11 @@ public class AdvisersController {
         if (id == null || id <= 0 || adviser == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(advisersService.updateAdviser(id, adviser), HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteAdviser(@PathVariable Long id) {
+        if (id == null || id <= 0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        advisersService.deleteAdviser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
