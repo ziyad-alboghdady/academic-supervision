@@ -47,4 +47,12 @@ public class AdvisersServiceImpl implements IAdvisersService{
         Advisers updatedAdviser = advisersRepository.save(adviser);
         return convertToDTO(updatedAdviser);
     }
+
+    @Override
+    public void deleteAdviser(Long id) {
+        if (!advisersRepository.existsById(id)) {
+            throw new RuntimeException("Adviser not found: " + id);
+        }
+        advisersRepository.deleteById(id);
+    }
 }
