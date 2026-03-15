@@ -1,5 +1,19 @@
 package org.example.academic_supervision.Controller;
 
+import jakarta.validation.Valid;
+import org.example.academic_supervision.DTO.AdvisersDTO;
+import org.example.academic_supervision.Model.Advisers;
+import org.example.academic_supervision.Service.IAdvisersService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/adviser")
 public class AdvisersController {
     private final static Logger logger = LoggerFactory.getLogger(AdvisersController.class);
     private final IAdvisersService advisersService;
