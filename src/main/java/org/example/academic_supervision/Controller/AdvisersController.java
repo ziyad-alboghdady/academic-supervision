@@ -24,4 +24,10 @@ public class AdvisersController {
     public ResponseEntity<AdvisersDTO> addAdviser(@Valid @RequestBody Advisers adviser) {
         return new ResponseEntity<>(advisersService.createAdviser(adviser), HttpStatus.CREATED);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<AdvisersDTO> updateAdviser(@PathVariable Long id, @Valid @RequestBody Advisers adviser) {
+        if (id == null || id <= 0 || adviser == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(advisersService.updateAdviser(id, adviser), HttpStatus.OK);
+    }
 }
