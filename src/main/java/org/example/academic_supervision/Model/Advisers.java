@@ -33,4 +33,14 @@ public class Advisers {
     @OneToMany(mappedBy = "adviser", cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnore
     private List<Supervises> supervises;
+
+    public Adviser(AdviserDTO adviserDTO) {
+        this.id = adviserDTO.getId();
+        this.name = adviserDTO.getName();
+        this.department = adviserDTO.getDepartment();
+    }
+
+    public AdviserDTO viewAsAdviserDTO() {
+        return new AdviserDTO(id, name, department);
+    }
 }
