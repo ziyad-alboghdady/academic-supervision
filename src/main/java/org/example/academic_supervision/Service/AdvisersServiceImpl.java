@@ -21,4 +21,11 @@ public class AdvisersServiceImpl implements IAdvisersService{
                 .map(this::convertToDTO)
                 .toList();
     }
+
+    @Override
+    public AdvisersDTO getAdviserById(Long id) {
+        Advisers adviser = advisersRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Adviser not found: " + id));
+        return convertToDTO(adviser);
+    }
 }
