@@ -19,4 +19,9 @@ public class AdvisersController {
         logger.info("Get adviser by id {}", id);
         return new ResponseEntity<>(advisersService.getAdviserById(id), HttpStatus.OK);
     }
+
+    @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<AdvisersDTO> addAdviser(@Valid @RequestBody Advisers adviser) {
+        return new ResponseEntity<>(advisersService.createAdviser(adviser), HttpStatus.CREATED);
+    }
 }
