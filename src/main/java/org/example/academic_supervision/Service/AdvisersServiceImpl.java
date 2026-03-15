@@ -14,4 +14,11 @@ public class AdvisersServiceImpl implements IAdvisersService{
     public AdvisersServiceImpl(AdvisersRepository advisersRepository) {
         this.advisersRepository = advisersRepository;
     }
+
+    @Override
+    public List<AdvisersDTO> getAllAdvisers() {
+        return advisersRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .toList();
+    }
 }
