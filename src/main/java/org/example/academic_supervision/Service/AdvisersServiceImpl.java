@@ -55,4 +55,8 @@ public class AdvisersServiceImpl implements IAdvisersService{
         }
         advisersRepository.deleteById(id);
     }
+
+    private AdvisersDTO convertToDTO(Advisers adviser) {
+        return new AdvisersDTO(adviser.getId(), adviser.getName(), adviser.getDepartment());
+    }
 }
