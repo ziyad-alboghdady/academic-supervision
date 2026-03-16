@@ -2,6 +2,7 @@ package org.example.academic_supervision.Controller;
 
 import jakarta.validation.Valid;
 import org.example.academic_supervision.DTO.StudiesDTO;
+import org.example.academic_supervision.Model.Studies;
 import org.example.academic_supervision.Service.IStudiesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,38 +21,32 @@ public class StudiesController {
         this.studiesService = studiesService;
     }
 
-    @GetMapping
-    public List<StudiesDTO> getAllStudies() {
-        return studiesService.getAllStudies();
+    @GetMapping("/all")
+    public ResponseEntity<List<StudiesDTO>> getAllStudies() {
+        return new ResponseEntity<>(studiesService.getAllStudies(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public StudiesDTO getStudyById(@PathVariable Long id) {
-        return studiesService.getStudyById(id);
+    @GetMapping(value = "/get/{id}", produces = "application/json")
+    public ResponseEntity<StudiesDTO> getStudyById(@PathVariable Long id) {
+        if (id == null || id <= 0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(studiesService.getStudyById(id), HttpStatus.OK);
     }
 
-    @PostMapping
-    public StudiesDTO createStudy(@Valid @RequestBody StudiesDTO studyDTO) {
-        return studiesService.createStudy(studyDTO);
+    @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<StudiesDTO> createStudy(@Valid @RequestBody Studies study) {
+        return new ResponseEntity<>(studiesService.createStudy(study), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public StudiesDTO updateStudy(@PathVariable Long id, @Valid @RequestBody StudiesDTO studyDTO) {
-        return studiesService.updateStudy(id, studyDTO);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<StudiesDTO> updateStudy(@PathVariable Long id, @Valid @RequestBody Studies study) {
+        if (id == null || id <= 0 || study == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(studiesService.updateStudy(id, study), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteStudy(@PathVariable Long id) {
-        try {
-            if (id == null || id <= 0) {
-                return new ResponseEntity<>("Invalid id", HttpStatus.BAD_REQUEST);
-            }
-
-            studiesService.deleteStudy(id);
-            return new ResponseEntity<>("Study deleted successfully", HttpStatus.OK);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteStudy(@PathVariable Long id) {
+        if (id == null || id <= 0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        studiesService.deleteStudy(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -32,4 +32,17 @@ public class Studies {
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Supervises> supervises;
 
+    public Studies(org.example.academic_supervision.DTO.StudiesDTO studiesDTO) {
+        this.id = studiesDTO.getId();
+        this.description = studiesDTO.getDescription();
+        this.title = studiesDTO.getTitle();
+    }
+
+    public org.example.academic_supervision.DTO.StudiesDTO viewAsStudiesDTO() {
+        org.example.academic_supervision.DTO.StudiesDTO dto = new org.example.academic_supervision.DTO.StudiesDTO();
+        dto.setId(this.id);
+        dto.setDescription(this.description);
+        dto.setTitle(this.title);
+        return dto;
+    }
 }

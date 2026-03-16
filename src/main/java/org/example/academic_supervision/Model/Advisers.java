@@ -34,13 +34,13 @@ public class Advisers {
     @JsonIgnore
     private List<Supervises> supervises;
 
-    public Adviser(AdviserDTO adviserDTO) {
+    public Advisers(org.example.academic_supervision.DTO.AdvisersDTO adviserDTO) {
         this.id = adviserDTO.getId();
         this.name = adviserDTO.getName();
         this.department = adviserDTO.getDepartment();
     }
 
-    public AdviserDTO viewAsAdviserDTO() {
-        return new AdviserDTO(id, name, department);
+    public org.example.academic_supervision.DTO.AdvisersDTO viewAsAdvisersDTO() {
+        return new org.example.academic_supervision.DTO.AdvisersDTO(id, name, department);
     }
 }
