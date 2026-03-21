@@ -256,7 +256,9 @@ Create Supervises
 
 Note: Supervises depends on existing Adviser and Study records.
 
-Project Structure
+## Project Structure
+
+```bash
 src
 ├── main
 │   ├── java/org/example/academic_supervision
@@ -271,22 +273,31 @@ src
 │       └── application.properties
 └── test
     └── java/org/example/academic_supervision
-What This Project Demonstrates
-Building REST APIs with Spring Boot
-Designing JPA entity relationships
-Applying validation rules
-Using layered architecture (Controller → Service → Repository)
-Handling exceptions professionally
-Integrating PostgreSQL with Hibernate
-Documenting APIs using Swagger
-Future Improvements
-Add unit and integration testing
-Implement pagination and filtering
-Improve DTO usage across all endpoints
-Add authentication (Spring Security + JWT)
-Add audit fields (createdAt, updatedAt)
-Enhance logging and monitoring
-Dockerize the application
-Author
+```
+## What This Project Demonstrates
+
+- Building REST APIs with Spring Boot  
+- Designing JPA entity relationships  
+- Applying validation rules  
+- Using layered architecture (Controller → Service → Repository)  
+- Handling exceptions professionally  
+- Integrating PostgreSQL with Hibernate  
+- Documenting APIs using Swagger  
+
+---
+
+## Future Improvements
+
+- Add unit and integration testing  
+- Implement pagination and filtering  
+- Improve DTO usage across all endpoints  
+- Add authentication (Spring Security + JWT)  
+- Add audit fields (createdAt, updatedAt)  
+- Enhance logging and monitoring  
+- Dockerize the application  
+
+---
+
+## Author
 
 Developed as part of an academic backend project using Spring Boot and PostgreSQL.
