@@ -181,31 +181,32 @@ Base path: `/supervises`
 
 ## Swagger API Documentation
 
-Swagger UI is enabled in this project.
+After running the application, you can access the API documentation using Swagger UI:
 
-After running the application, open:
+- Swagger UI: http://localhost:8080/swagger-ui/index.html  
+- OpenAPI JSON: http://localhost:8080/v3/api-docs
 
-```bash
-http://localhost:8080/swagger-ui.html
+> Note: In newer Spring Boot versions (Springdoc OpenAPI 3+), `/swagger-ui.html` may not work. Use `/swagger-ui/index.html` instead.
 
-API docs JSON:
+---
 
-http://localhost:8080/api-docs
-Database Configuration
+## Database Configuration
 
-The project is configured for PostgreSQL in application.properties.
+The project is configured to use **PostgreSQL**.
 
-Current configuration:
+Example configuration in `application.properties`:
 
+```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/DIMS1
 spring.datasource.username=postgres
 spring.datasource.password=your_password
+
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 
-Before running the project, make sure PostgreSQL is installed, the database exists, and the username/password match your local environment.
+Make sure PostgreSQL is installed, and update the username/password according to your local setup.
 
 Getting Started
 1. Clone the repository
@@ -213,15 +214,15 @@ git clone https://github.com/your-username/academic-supervision.git
 cd academic-supervision
 2. Configure the database
 
-Create a PostgreSQL database, for example:
+Create a PostgreSQL database:
 
 CREATE DATABASE DIMS1;
 
-Then update application.properties with your PostgreSQL username and password.
+Then update your credentials inside application.properties.
 
 3. Build and run the project
 
-Using Maven wrapper:
+Using Maven Wrapper:
 
 ./mvnw spring-boot:run
 
@@ -233,8 +234,8 @@ Or using Maven:
 
 mvn spring-boot:run
 4. Access the application
-API base URL: http://localhost:8080
-Swagger UI: http://localhost:8080/swagger-ui.html
+API Base URL: http://localhost:8080
+Swagger UI: http://localhost:8080/swagger-ui/index.html
 Example JSON Requests
 Create Adviser
 {
@@ -254,7 +255,7 @@ Create Supervises
   "studyId": 1
 }
 
-Note: the Supervises entity is linked to both an adviser and a study, so related records should exist first.
+Note: Supervises depends on existing Adviser and Study records.
 
 Project Structure
 src
@@ -272,29 +273,21 @@ src
 └── test
     └── java/org/example/academic_supervision
 What This Project Demonstrates
-
-This project demonstrates practical backend development skills, including:
-
-building REST APIs with Spring Boot
-designing JPA entity relationships
-applying validation rules
-structuring code using layered architecture
-handling exceptions professionally
-integrating PostgreSQL with Hibernate
-documenting APIs with Swagger
+Building REST APIs with Spring Boot
+Designing JPA entity relationships
+Applying validation rules
+Using layered architecture (Controller → Service → Repository)
+Handling exceptions professionally
+Integrating PostgreSQL with Hibernate
+Documenting APIs using Swagger
 Future Improvements
-
-Possible enhancements for future development:
-
-add unit and integration tests for services and controllers
-improve DTO usage in request bodies for all endpoints
-add pagination and filtering
-add authentication and authorization with Spring Security
-add audit fields such as createdAt and updatedAt
-improve logging and monitoring
-add Docker support for easier deployment
+Add unit and integration testing
+Implement pagination and filtering
+Improve DTO usage across all endpoints
+Add authentication (Spring Security + JWT)
+Add audit fields (createdAt, updatedAt)
+Enhance logging and monitoring
+Dockerize the application
 Author
 
 Developed as part of an academic backend project using Spring Boot and PostgreSQL.
-
-If you like this project, feel free to star the repository and share feedback.
