@@ -209,7 +209,7 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 Make sure PostgreSQL is installed, and update the username/password according to your local setup.
 Getting Started
 1. Clone the repository
-git clone https://github.com/your-username/academic-supervision.git
+git clone https://github.com/ziyad-alboghdady/academic-supervision.git
 cd academic-supervision
 2. Configure the database
 
