@@ -205,7 +205,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
-
+```
 Make sure PostgreSQL is installed, and update the username/password according to your local setup.
 
 Getting Started
